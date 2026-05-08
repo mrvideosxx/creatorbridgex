@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreatorBridge — Authorization</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.card { background: #141418; border: 1px solid #222; border-radius: 16px; padding: 2.5rem; max-width: 500px; text-align: center; }
+h1 { font-size: 1.5rem; margin-bottom: 1rem; color: #22c55e; }
+p { color: #888; margin-bottom: 1.5rem; font-size: 0.95rem; }
+.code-box { background: #0a0a0a; border: 1px solid #333; border-radius: 8px; padding: 1rem; word-break: break-all; font-family: monospace; font-size: 0.85rem; color: #a78bfa; margin-bottom: 1rem; user-select: all; cursor: pointer; }
+.btn { padding: 10px 24px; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; background: linear-gradient(135deg, #6C3CE1, #3B82F6); color: #fff; }
+.error { color: #ef4444; }
+.hint { font-size: 0.8rem; color: #555; margin-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+    <h1>✓ Authorization Successful</h1>
+    <p>Copy the code below and paste it into CreatorBridge:</p>
+    <div class="code-box" id="codeBox" onclick="copyCode()">Loading...</div>
+    <button class="btn" onclick="copyCode()">Copy Code</button>
+    <p class="hint">You can close this window after copying.</p>
+</div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get('code');
+const error = params.get('error');
+const box = document.getElementById('codeBox');
+const card = document.getElementById('card');
+
+if (error) {
+    card.innerHTML = '<h1 class="error">Authorization Failed</h1><p>Error: ' + error + '</p><p>' + (params.get('error_description') || '') + '</p>';
+} else if (code) {
+    box.textContent = code;
+} else {
+    card.innerHTML = '<h1 class="error">No Code Found</h1><p>No authorization code was received. Please try again.</p>';
+}
+
+function copyCode() {
+    if (code) {
+        navigator.clipboard.writeText(code);
+        box.style.borderColor = '#22c55e';
+        box.textContent = '✓ Copied!';
+        setTimeout(() => { box.textContent = code; box.style.borderColor = '#333'; }, 2000);
+    }
+}
+</script>
+</body>
+</html>
