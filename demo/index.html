@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreatorBridge — Demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <nav class="sidebar">
+    <div class="logo">🌉 CreatorBridge</div>
+    <div class="nav-items">
+      <a class="nav-item active" data-step="dashboard">📊 Dashboard</a>
+      <a class="nav-item" data-step="publish">📤 Publish</a>
+      <a class="nav-item" data-step="accounts">👤 Accounts</a>
+      <a class="nav-item" data-step="settings">⚙️ Settings</a>
+    </div>
+    <div class="user-info">
+      <div class="avatar-small">AC</div>
+      <span>André Creator</span>
+    </div>
+  </nav>
+
+  <main class="content">
+    <!-- Step 1: Login -->
+    <div id="step-login" class="step active">
+      <div class="login-container">
+        <div class="login-card">
+          <div class="login-logo">🌉</div>
+          <h1>CreatorBridge</h1>
+          <p>Manage and publish your content across platforms</p>
+          <button class="btn-tiktok" onclick="goTo('dashboard')">
+            <span class="tt-icon">♪</span> Continue with TikTok
+          </button>
+          <button class="btn-secondary" onclick="goTo('dashboard')">Continue with Facebook</button>
+          <p class="terms">By continuing, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Dashboard -->
+    <div id="step-dashboard" class="step">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <button class="btn-primary" onclick="goTo('publish')">+ New Post</button>
+      </div>
+      <div class="connected-account">
+        <div class="account-card">
+          <div class="account-header">
+            <div class="platform-badge tiktok">♪ TikTok</div>
+            <span class="status-badge">✓ Connected</span>
+          </div>
+          <div class="account-info">
+            <div class="avatar">AC</div>
+            <div>
+              <div class="account-name">@andrecreator</div>
+              <div class="account-meta">12.4K followers · 89 videos</div>
+            </div>
+          </div>
+        </div>
+        <div class="account-card">
+          <div class="account-header">
+            <div class="platform-badge facebook">f Facebook</div>
+            <span class="status-badge">✓ Connected</span>
+          </div>
+          <div class="account-info">
+            <div class="avatar" style="background:#3b82f6">CB</div>
+            <div>
+              <div class="account-name">CreatorBridge Page</div>
+              <div class="account-meta">2.1K followers · 34 posts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Recent Posts</h2>
+      <div class="posts-table">
+        <div class="table-header">
+          <span>Title</span><span>Platform</span><span>Status</span><span>Views</span><span>Date</span>
+        </div>
+        <div class="table-row"><span>The Hidden Truth About Dreams</span><span>♪ TikTok</span><span class="status-pub">Published</span><span>14.2K</span><span>May 7</span></div>
+        <div class="table-row"><span>5 Psychology Facts You Didn't Know</span><span>f Facebook</span><span class="status-pub">Published</span><span>8.7K</span><span>May 6</span></div>
+        <div class="table-row"><span>Why We Fear The Dark</span><span>♪ TikTok</span><span class="status-sched">Scheduled</span><span>—</span><span>May 9</span></div>
+      </div>
+    </div>
+
+    <!-- Step 3: Publish -->
+    <div id="step-publish" class="step">
+      <div class="page-header">
+        <h1>Create New Post</h1>
+      </div>
+      <div class="publish-layout">
+        <div class="publish-form">
+          <div class="form-group">
+            <label>Select Account</label>
+            <div class="account-selector">
+              <div class="selector-option selected">
+                <div class="avatar-tiny">AC</div>
+                <span>@andrecreator</span>
+                <span class="platform-badge tiktok small">♪ TikTok</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Upload Video</label>
+            <div class="upload-zone" id="uploadZone" onclick="simulateUpload()">
+              <div id="uploadContent">
+                <div class="upload-icon">📁</div>
+                <p>Click to select video or drag & drop</p>
+                <span class="upload-hint">MP4, max 10 min, 9:16 recommended</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Caption</label>
+            <textarea class="form-input" rows="3" placeholder="Write your caption...">The hidden psychology behind your daily habits. You won't believe #3! 🧠</textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Hashtags</label>
+            <div class="tags-container">
+              <span class="tag">#psychology</span>
+              <span class="tag">#mindset</span>
+              <span class="tag">#facts</span>
+              <span class="tag">#fyp</span>
+              <input class="tag-input" placeholder="Add hashtag...">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Privacy Setting</label>
+            <select class="form-select">
+              <option>Everyone</option>
+              <option>Friends only</option>
+              <option>Only me</option>
+            </select>
+          </div>
+
+          <div class="form-group toggles">
+            <div class="toggle-row">
+              <span>Allow Comments</span>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <span>Allow Duets</span>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <span>Allow Stitch</span>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row highlight">
+              <span>⚠️ AI-Generated Content</span>
+              <label class="switch"><input type="checkbox" id="aiToggle"><span class="slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <span>Commercial / Branded Content</span>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Schedule</label>
+            <div class="schedule-options">
+              <label class="radio-option selected"><input type="radio" name="schedule" checked> Publish Now</label>
+              <label class="radio-option"><input type="radio" name="schedule"> Schedule for Later</label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-secondary" onclick="goTo('dashboard')">Cancel</button>
+            <button class="btn-primary" onclick="goTo('preview')">Preview & Publish →</button>
+          </div>
+        </div>
+
+        <div class="phone-preview">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-video">
+                <div class="video-placeholder">📱 Video Preview</div>
+              </div>
+              <div class="phone-caption">The hidden psychology behind your daily habits...</div>
+              <div class="phone-tags">#psychology #mindset #facts #fyp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Preview & Confirm -->
+    <div id="step-preview" class="step">
+      <div class="page-header"><h1>Review & Confirm</h1></div>
+      <div class="preview-card">
+        <div class="preview-section">
+          <h3>Account</h3>
+          <div class="account-info">
+            <div class="avatar-tiny">AC</div>
+            <span>@andrecreator · <span class="platform-badge tiktok small">♪ TikTok</span></span>
+          </div>
+        </div>
+        <div class="preview-section">
+          <h3>Video</h3>
+          <div class="preview-video">🎬 psychology_habits_final.mp4 — 0:47 — 1080×1920</div>
+        </div>
+        <div class="preview-section">
+          <h3>Caption</h3>
+          <p>The hidden psychology behind your daily habits. You won't believe #3! 🧠</p>
+        </div>
+        <div class="preview-section">
+          <h3>Hashtags</h3>
+          <div class="tags-container"><span class="tag">#psychology</span><span class="tag">#mindset</span><span class="tag">#facts</span><span class="tag">#fyp</span></div>
+        </div>
+        <div class="preview-section">
+          <h3>Settings</h3>
+          <div class="settings-summary">
+            <span>👁 Privacy: Everyone</span>
+            <span>💬 Comments: On</span>
+            <span>🔄 Duets: On</span>
+            <span>✂️ Stitch: On</span>
+            <span>🤖 AI Content: Disclosed</span>
+          </div>
+        </div>
+        <div class="confirm-actions">
+          <button class="btn-secondary" onclick="goTo('publish')">← Edit</button>
+          <button class="btn-publish" onclick="publishPost()">✓ Confirm & Publish</button>
+        </div>
+      </div>
+
+      <div id="publishingOverlay" class="publishing-overlay hidden">
+        <div class="publishing-card">
+          <div class="spinner" id="publishSpinner"></div>
+          <h2 id="publishStatus">Publishing to TikTok...</h2>
+          <p id="publishDetail">Uploading video...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+function goTo(step) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + step).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const nav = document.querySelector(`[data-step="${step}"]`);
+  if (nav) nav.classList.add('active');
+  if (step === 'login') return;
+  document.querySelector('.sidebar').style.display = '';
+}
+
+function simulateUpload() {
+  const zone = document.getElementById('uploadZone');
+  const content = document.getElementById('uploadContent');
+  zone.classList.add('uploaded');
+  content.innerHTML = '<div class="file-info">✅ <strong>psychology_habits_final.mp4</strong><br>47 seconds · 1080×1920 · 24.3 MB</div>';
+}
+
+function publishPost() {
+  const overlay = document.getElementById('publishingOverlay');
+  overlay.classList.remove('hidden');
+  const status = document.getElementById('publishStatus');
+  const detail = document.getElementById('publishDetail');
+  const spinner = document.getElementById('publishSpinner');
+  setTimeout(() => { detail.textContent = 'Processing video...'; }, 1500);
+  setTimeout(() => { detail.textContent = 'Finalizing post...'; }, 3000);
+  setTimeout(() => {
+    spinner.classList.add('done');
+    spinner.textContent = '✓';
+    status.textContent = 'Published Successfully!';
+    detail.textContent = 'Your video is now live on TikTok';
+  }, 4500);
+  setTimeout(() => { overlay.classList.add('hidden'); goTo('dashboard'); }, 7000);
+}
+
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => goTo(item.dataset.step));
+});
+</script>
+</body>
+</html>
